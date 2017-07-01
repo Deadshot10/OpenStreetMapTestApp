@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">OSMapplication</string>
+    <string name="button_close">button_close</string>
+    <string name="Alert">Тревога</string>
+    <string name="Route">Маршрут</string>
+    <string name="Objects">Объекты</string>
+    <string name="Menu">Меню</string>
+    <string name="ATM">Банкоматы</string>
+    <string name="To">До</string>
+    <string name="auto_parts">Магазины запчастей</string>
+    <string name="route">Маршрут</string>
+    <string name="route_objects_caption">На маршруте должны быть:</string>
+    <string name="From">От</string>
+    <string name="weight_station">Пункты весого контроля</string>
+    <string name="camps">Стоянки и кемпинги</string>
+</resources>

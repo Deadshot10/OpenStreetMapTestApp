@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:fillViewport="true"
+              android:weightSum="100">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:weightSum="100" android:background="@color/colorPrimary"
+            android:layout_height="50dp">
+        <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/closeButton"
+                android:background="@drawable/close"
+                tools:ignore="ContentDescription"
+                android:layout_weight="15"
+                android:scaleX="0.5" android:scaleY="0.5"
+                android:layout_gravity="center_vertical" android:adjustViewBounds="true"/>
+        <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/tvRouteInfo"
+                android:textAppearance="@style/TextAppearance.AppCompat" android:layout_weight="70"
+                android:textAlignment="textStart" android:textAllCaps="false" tools:ignore="HardcodedText"
+                android:layout_gravity="center_vertical" android:textSize="18sp"/>
+        <ImageButton
+                android:layout_width="50dp" android:layout_weight="15"
+                android:layout_height="wrap_content"
+                android:id="@+id/refreshButton" android:background="@drawable/refresh"
+                tools:ignore="ContentDescription"
+                android:scaleX="0.5" android:scaleY="0.5" android:layout_gravity="center_vertical"
+                android:adjustViewBounds="true" android:cropToPadding="false"
+        />
+    </LinearLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="70">
+
+        <org.osmdroid.views.MapView android:id="@+id/map"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentLeft="true" android:layout_alignParentStart="true"/>
+        <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/buttonMyLocation"
+                android:background="@drawable/button_gps" android:scaleX="0.8" android:scaleY="0.8"
+                android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" android:layout_marginTop="21dp"/>
+    </RelativeLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:weightSum="4" android:background="@android:color/background_light" android:layout_height="170dp"
+            android:baselineAligned="false">
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1">
+
+            <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sosButton"
+                    android:scaleX="0.7" android:scaleY="0.7" android:background="@drawable/sos"
+                    tools:ignore="ContentDescription"/>
+            <TextView
+                    android:text="@string/Alert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/sosTextview" android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"/>
+        </LinearLayout>
+                <LinearLayout android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1">
+
+            <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:background="@drawable/objects" android:id="@+id/objectsButton"
+                    android:scaleX="0.7" android:scaleY="0.7" tools:ignore="ContentDescription"/>
+            <TextView
+                    android:text="@string/Objects"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/objectsTextview" android:textSize="14sp"
+                    android:textAlignment="center" android:textColor="@android:color/black"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1" android:baselineAligned="false">
+
+            <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:background="@drawable/route" android:id="@+id/routeButton"
+                    android:scaleX="0.7" android:scaleY="0.7" tools:ignore="ContentDescription"/>
+            <TextView
+                    android:text="@string/Route"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/routeTextview" android:textSize="14sp"
+                    android:textAlignment="center" android:textColor="@android:color/black"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1">
+
+            <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:background="@drawable/menu" android:id="@+id/menuButton"
+                    android:scaleX="0.7" android:scaleY="0.7" tools:ignore="ContentDescription"/>
+            <TextView
+                    android:text="@string/Menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/menuTextview" android:textSize="14sp"
+                    android:textAlignment="center" android:textColor="@android:color/black"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

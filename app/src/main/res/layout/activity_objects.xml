@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_objects"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:context="ru.volodya.apps.osmapplication.ObjectsActivity"
+>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:weightSum="100" android:background="@color/colorPrimary"
+            android:layout_height="50dp">
+        <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonBack"
+                android:background="@drawable/back"
+                tools:ignore="ContentDescription"
+                android:layout_weight="15"
+                android:scaleX="0.5" android:scaleY="0.5"
+                android:layout_gravity="center_vertical" android:adjustViewBounds="true"/>
+        <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/tvRouteInfo"
+                android:textAppearance="@style/TextAppearance.AppCompat" android:layout_weight="70"
+                android:textAlignment="textStart" android:textAllCaps="false"
+                android:layout_gravity="center_vertical" android:textSize="18sp" android:text="@string/route"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="@string/From"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView" android:textSize="18sp"
+                    android:gravity="center_vertical" android:layout_weight="0.97"/>
+            <TextView
+                    android:text="@string/To"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_weight="1"
+                    android:textSize="18sp" android:gravity="center_vertical"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <EditText
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editText" android:layout_width="260dp"/>
+            <EditText
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editText2" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:weightSum="1">
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/imageView"
+                    android:scaleX="0.7" android:scaleY="0.7" android:background="@drawable/gps"
+            />
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/imageView2"
+                    android:scaleX="0.6" android:scaleY="0.6" android:background="@drawable/point"
+                    android:elevation="1dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:layout_height="match_parent" android:id="@+id/imageView3"
+                    android:scaleY="0.4" android:scaleX="0.7" android:background="@drawable/switch_arrow"
+                    android:layout_width="30dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+            android:text="@string/route_objects_caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView3" android:textSize="18sp"
+            android:textAlignment="center" android:textStyle="normal|bold"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/llMatchedObjects">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/llGas">
+            <ImageView
+                    android:id="@+id/imageView4"
+                    android:background="@drawable/gas" android:scaleX="0.8"
+                    android:scaleY="0.8" android:layout_weight="0.28"
+                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
+            <TextView
+                    android:text="Автозаправочные станции"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_weight="2"
+                    android:layout_gravity="center_vertical" tools:ignore="HardcodedText"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/checkBoxGas"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_vertical"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView
+                    android:id="@+id/imageView5"
+                    android:background="@drawable/camp" android:scaleX="0.8"
+                    android:scaleY="0.8" android:layout_weight="0.16"
+                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
+            <TextView
+                    android:text="@string/camps"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView5" android:layout_weight="2"
+                    android:layout_gravity="center_vertical"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/checkBoxCamp"
+                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView
+                    android:id="@+id/imageView6"
+                    android:background="@drawable/tech_service" android:scaleX="0.8"
+                    android:scaleY="0.8" android:layout_weight="0.14"
+                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
+            <TextView
+                    android:text="СТО и шиномонтаж"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView6" android:layout_weight="2"
+                    android:layout_gravity="center_vertical"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/checkBoxTech"
+                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView
+                    android:id="@+id/imageView7"
+                    android:background="@drawable/weight_station" android:scaleX="0.8"
+                    android:scaleY="0.8" android:layout_weight="0.20"
+                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
+            <TextView
+                    android:text="@string/weight_station"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView7" android:layout_weight="2"
+                    android:layout_gravity="center_vertical"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/checkBoxWeight"
+                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView
+                    android:id="@+id/imageView8"
+                    android:background="@drawable/auto_parts" android:scaleX="0.8"
+                    android:scaleY="0.8" android:layout_weight="0.17"
+                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
+            <TextView
+                    android:text="@string/auto_parts"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView8" android:layout_weight="2"
+                    android:layout_gravity="center_vertical"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/checkBoxParts"
+                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView
+                    android:id="@+id/imageView9"
+                    android:background="@drawable/atm" android:scaleX="0.8"
+                    android:scaleY="0.8" android:layout_weight="0.13"
+                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
+            <TextView
+                    android:text="@string/ATM"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView9" android:layout_weight="1.94"
+                    android:layout_gravity="center_vertical"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/checkBoxAtm"
+                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
