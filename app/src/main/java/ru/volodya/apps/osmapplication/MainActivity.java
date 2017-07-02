@@ -1,8 +1,10 @@
 package ru.volodya.apps.osmapplication;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -10,6 +12,9 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
@@ -22,6 +27,7 @@ import org.osmdroid.views.MapView;
 
 public class MainActivity extends Activity {
 
+    private static final int PERMISSION_REQUEST_CODE = 100;
     private ImageButton buttonClose, buttonRefresh, buttonSOS, buttonRoute, buttonMenu, buttonObjects;
     private TextView textViewRouteInfo;
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.5F);
@@ -49,8 +55,16 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 1L, locationListener);
+            initLocationManager();
+        } else {
+            //Get permission
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                initLocationManager();
+            } else {
+                requestRequriedPermissions();
+            }
+
         }
 
         MapView map = (MapView) findViewById(R.id.map);
@@ -113,6 +127,22 @@ public class MainActivity extends Activity {
 
     }
 
+    private void requestRequriedPermissions() {
+            ActivityCompat.requestPermissions(this,
+                    new String[] {
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    },
+                    PERMISSION_REQUEST_CODE);
+
+    }
+
+    private void initLocationManager() {
+        if (locationManager == null) {
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 1L, locationListener);
+        }
+    }
+
     private void setLocation(IMapController mc) {
         if (deviceLocation != null) {
             GeoPoint startPoint = new GeoPoint(deviceLocation.getLatitude(), deviceLocation.getLongitude());
@@ -127,6 +157,16 @@ public class MainActivity extends Activity {
                 v.startAnimation(buttonClick);
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE && grantResults.length == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                initLocationManager();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
