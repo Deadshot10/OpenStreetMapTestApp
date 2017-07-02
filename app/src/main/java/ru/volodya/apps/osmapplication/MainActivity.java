@@ -15,6 +15,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
@@ -28,9 +31,11 @@ import org.osmdroid.views.MapView;
 public class MainActivity extends Activity {
 
     private static final int PERMISSION_REQUEST_CODE = 100;
-    private ImageButton buttonClose, buttonRefresh, buttonSOS, buttonRoute, buttonMenu, buttonObjects;
+
+    private ImageButton buttonClose, buttonRefresh, buttonSOS, buttonRoute, buttonMenu, buttonObjects, buttonScaleUp, buttonScaleDown;
     private TextView textViewRouteInfo;
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.5F);
+
     private LocationManager locationManager;
     private Location deviceLocation;
     private LocationListener locationListener = new LocationListener() {
@@ -45,6 +50,7 @@ public class MainActivity extends Activity {
         @Override
         public void onProviderDisabled(String provider) {}
     };
+    private MapView map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,27 +59,39 @@ public class MainActivity extends Activity {
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);//randomize?
         setContentView(R.layout.activity_main);
-
+        //add listener for 2G traffic block
+        TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        telephonyManager.listen(new PhoneStateListener(){
+            @Override
+            public void onDataConnectionStateChanged(int state, int networkType) {
+                Log.v("INFO", "Connection state changed");
+                if (map != null)
+                    if (Utility.getNetworkClassById(networkType).equals("2G"))
+                        map.getTileProvider().setUseDataConnection(false);
+                     else
+                        map.getTileProvider().setUseDataConnection(true);
+            }
+        }, PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
+        //Get "dangerous" permission on sdk 23.0 and higher
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             initLocationManager();
         } else {
-            //Get permission
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 initLocationManager();
             } else {
-                requestRequriedPermissions();
+                requestRequiredPermissions();
             }
-
         }
 
-        MapView map = (MapView) findViewById(R.id.map);
+        map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setBuiltInZoomControls(true);
+        //map.setBuiltInZoomControls(false);
         map.setMultiTouchControls(true);
         final IMapController mapController = map.getController();
         mapController.setZoom(18);
 
+        //center screen on gps position
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -95,6 +113,8 @@ public class MainActivity extends Activity {
         buttonObjects= (ImageButton) findViewById(R.id.objectsButton);
         buttonRoute = (ImageButton) findViewById(R.id.routeButton);
         buttonMenu = (ImageButton) findViewById(R.id.menuButton);
+        buttonScaleDown = (ImageButton) findViewById(R.id.buttonScaleDown);
+        buttonScaleUp = (ImageButton) findViewById(R.id.buttonScaleUp);
         ImageButton locationButton = (ImageButton) findViewById(R.id.buttonMyLocation);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +128,8 @@ public class MainActivity extends Activity {
         initImageButton(buttonRefresh);
         initImageButton(buttonRoute);
         initImageButton(buttonMenu);
+        initImageButton(buttonScaleDown);
+        initImageButton(buttonScaleUp);
 
         buttonClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,16 +146,11 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(getApplication(), ObjectsActivity.class));
             }
         });
-
     }
 
-    private void requestRequriedPermissions() {
+    private void requestRequiredPermissions() {
             ActivityCompat.requestPermissions(this,
-                    new String[] {
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                    },
-                    PERMISSION_REQUEST_CODE);
-
+                    new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, PERMISSION_REQUEST_CODE);
     }
 
     private void initLocationManager() {
@@ -144,7 +161,7 @@ public class MainActivity extends Activity {
     }
 
     private void setLocation(IMapController mc) {
-        if (deviceLocation != null) {
+        if (deviceLocation != null && mc != null) {
             GeoPoint startPoint = new GeoPoint(deviceLocation.getLatitude(), deviceLocation.getLongitude());
             mc.setCenter(startPoint);
         }
@@ -172,5 +189,14 @@ public class MainActivity extends Activity {
     @Override
     public void onResume(){
         super.onResume();
+        if (locationManager != null)
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 1L, locationListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (locationManager != null)
+            locationManager.removeUpdates(locationListener);
     }
 }
