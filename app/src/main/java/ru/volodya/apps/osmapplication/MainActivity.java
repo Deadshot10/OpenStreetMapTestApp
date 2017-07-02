@@ -1,29 +1,23 @@
 package ru.volodya.apps.osmapplication;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.Image;
+import android.os.Build;
 import android.preference.PreferenceManager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 
 public class MainActivity extends Activity {
@@ -54,9 +48,10 @@ public class MainActivity extends Activity {
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);//randomize?
         setContentView(R.layout.activity_main);
 
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                5000L, 1L, locationListener);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 1L, locationListener);
+        }
 
         MapView map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -64,7 +59,7 @@ public class MainActivity extends Activity {
         map.setMultiTouchControls(true);
         final IMapController mapController = map.getController();
         mapController.setZoom(18);
-//uiyui
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -137,10 +132,5 @@ public class MainActivity extends Activity {
     @Override
     public void onResume(){
         super.onResume();
-        //this will refresh the osmdroid configuration on resuming.
-        //if you make changes to the configuration, use
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        //Configuration.getInstance().save(this, prefs);
-        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
     }
 }
