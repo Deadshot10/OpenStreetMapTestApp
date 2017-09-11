@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.*;
 
-public class ObjectsActivity extends Activity {
+public class ObjectsActivity extends AppCompatActivity {
 
     private static final String GAS = "gas";
     private static final String CAMP = "camp";

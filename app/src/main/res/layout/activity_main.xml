@@ -1,126 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:fillViewport="true"
-              android:weightSum="100">
-    <LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fillViewport="true"
+                android:id="@+id/mainView">
+    <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:weightSum="100" android:background="@color/colorPrimary"
-            android:layout_height="50dp">
+            android:background="@color/colorPrimary"
+            android:layout_height="60dp"
+            android:id="@+id/actionBar"
+            android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
         <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/closeButton"
-                android:background="@drawable/close"
+                android:background="@android:color/transparent"
                 tools:ignore="ContentDescription"
-                android:layout_weight="15"
-                android:scaleX="0.5" android:scaleY="0.5"
-                android:layout_gravity="center_vertical" android:adjustViewBounds="true"/>
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_close_cross"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:scaleX="0.8" android:scaleY="0.8"/>
         <TextView
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/tvRouteInfo"
-                android:textAppearance="@style/TextAppearance.AppCompat" android:layout_weight="70"
-                android:textAlignment="textStart" android:textAllCaps="false" tools:ignore="HardcodedText"
-                android:layout_gravity="center_vertical" android:textSize="18sp"/>
+                android:layout_height="match_parent"
+                android:id="@+id/tvRouteInfo"
+                tools:ignore="HardcodedText"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/refreshButton"
+                android:layout_toRightOf="@+id/closeButton"
+                android:gravity="center_vertical"
+                android:textColor="#FFF"/>
         <ImageButton
-                android:layout_width="50dp" android:layout_weight="15"
-                android:layout_height="wrap_content"
-                android:id="@+id/refreshButton" android:background="@drawable/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/refreshButton"
                 tools:ignore="ContentDescription"
-                android:scaleX="0.5" android:scaleY="0.5" android:layout_gravity="center_vertical"
-                android:adjustViewBounds="true" android:cropToPadding="false"
-        />
-    </LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/ic_refresh_arrows"
+                android:layout_alignParentRight="true" android:scaleX="0.8" android:scaleY="0.8"/>
+    </RelativeLayout>
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="70">
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/mapContainer"
+            android:layout_below="@+id/actionBar"
+            android:layout_above="@+id/bottomBar">
 
         <org.osmdroid.views.MapView android:id="@+id/map"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_alignParentTop="true"
-                                    android:layout_alignParentLeft="true" android:layout_alignParentStart="true"/>
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentStart="true"/>
         <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
                 android:id="@+id/buttonMyLocation"
-                android:background="@drawable/button_gps" android:scaleX="0.8" android:scaleY="0.8"
-                android:layout_alignParentTop="true" android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" android:layout_marginTop="21dp"/>
+                android:background="@android:color/transparent"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:ignore="ContentDescription"
+                android:src="@mipmap/ic_gps_button"
+                android:scaleType="fitCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+        <ImageButton
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonScaleDown"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:src="@mipmap/ic_minus_scale"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/buttonScaleUp"
+                android:layout_alignLeft="@+id/buttonMyLocation"
+                android:layout_alignStart="@+id/buttonMyLocation"/>
+        <ImageButton
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonScaleUp"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:src="@mipmap/ic_plus_scale"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/buttonMyLocation"
+                android:layout_alignLeft="@+id/buttonMyLocation"
+                android:layout_alignStart="@+id/buttonMyLocation"/>
     </RelativeLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:weightSum="4" android:background="@android:color/background_light" android:layout_height="170dp"
-            android:baselineAligned="false">
+            android:background="@android:color/background_light"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/bottomBar">
         <LinearLayout android:orientation="vertical"
-                      android:layout_width="match_parent"
+                      android:layout_width="0dp"
                       android:layout_height="match_parent"
                       android:layout_weight="1">
-
+            <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
             <ImageButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/sosButton"
-                    android:scaleX="0.7" android:scaleY="0.7" android:background="@drawable/sos"
-                    tools:ignore="ContentDescription"/>
+                    tools:ignore="ContentDescription"
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/ic_sos"
+                    android:scaleType="fitCenter"/>
             <TextView
                     android:text="@string/Alert"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/sosTextview" android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sosTextview"
+                    android:textSize="14sp"
                     android:textAlignment="center"
-                    android:textColor="@android:color/black"/>
+                    android:layout_margin="5dp"/>
         </LinearLayout>
-                <LinearLayout android:orientation="vertical"
-                      android:layout_width="match_parent"
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="0dp"
                       android:layout_height="match_parent"
                       android:layout_weight="1">
-
+            <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
             <ImageButton
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:background="@drawable/objects" android:id="@+id/objectsButton"
-                    android:scaleX="0.7" android:scaleY="0.7" tools:ignore="ContentDescription"/>
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/objectsButton"
+                    tools:ignore="ContentDescription"
+                    android:src="@mipmap/ic_objects"
+                    android:scaleType="centerInside"/>
             <TextView
                     android:text="@string/Objects"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/objectsTextview" android:textSize="14sp"
-                    android:textAlignment="center" android:textColor="@android:color/black"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/objectsTextview"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:layout_margin="5dp"/>
         </LinearLayout>
         <LinearLayout android:orientation="vertical"
-                      android:layout_width="match_parent"
+                      android:layout_width="0dp"
                       android:layout_height="match_parent"
-                      android:layout_weight="1" android:baselineAligned="false">
-
+                      android:layout_weight="1">
+            <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
             <ImageButton
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:background="@drawable/route" android:id="@+id/routeButton"
-                    android:scaleX="0.7" android:scaleY="0.7" tools:ignore="ContentDescription"/>
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/routeButton"
+                    tools:ignore="ContentDescription"
+                    android:src="@mipmap/ic_route"
+                    android:scaleType="centerInside"/>
             <TextView
                     android:text="@string/Route"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/routeTextview" android:textSize="14sp"
-                    android:textAlignment="center" android:textColor="@android:color/black"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/routeTextview"
+                    android:textSize="14sp"
+                    android:layout_margin="5dp"
+                    android:textAlignment="center"/>
         </LinearLayout>
         <LinearLayout android:orientation="vertical"
-                      android:layout_width="match_parent"
+                      android:layout_width="0dp"
                       android:layout_height="match_parent"
                       android:layout_weight="1">
-
+            <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
             <ImageButton
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:background="@drawable/menu" android:id="@+id/menuButton"
-                    android:scaleX="0.7" android:scaleY="0.7" tools:ignore="ContentDescription"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/menuButton"
+                    android:scaleX="1" android:scaleY="1"
+                    tools:ignore="ContentDescription"
+                    android:src="@mipmap/ic_menu"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerInside"/>
             <TextView
                     android:text="@string/Menu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/menuTextview" android:textSize="14sp"
-                    android:textAlignment="center" android:textColor="@android:color/black"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/menuTextview"
+                    android:textSize="14sp"
+                    android:layout_margin="5dp"
+                    android:textAlignment="center"/>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -1,229 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        tools:context="ru.volodya.apps.osmapplication.ObjectsActivity"
         android:id="@+id/activity_objects"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        tools:context="ru.volodya.apps.osmapplication.ObjectsActivity"
->
-    <LinearLayout
+        android:orientation="vertical">
+    <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:weightSum="100" android:background="@color/colorPrimary"
-            android:layout_height="50dp">
+            android:background="@color/colorPrimary"
+            android:layout_height="60dp"
+            android:id="@+id/actionBar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
         <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/buttonBack"
-                android:background="@drawable/back"
+                android:src="@mipmap/ic_back_arrow"
                 tools:ignore="ContentDescription"
-                android:layout_weight="15"
-                android:scaleX="0.5" android:scaleY="0.5"
-                android:layout_gravity="center_vertical" android:adjustViewBounds="true"/>
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter" android:scaleX="0.8" android:scaleY="0.8"/>
         <TextView
-                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/buttonBack"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/tvRouteInfo"
-                android:textAppearance="@style/TextAppearance.AppCompat" android:layout_weight="70"
-                android:textAlignment="textStart" android:textAllCaps="false"
-                android:layout_gravity="center_vertical" android:textSize="18sp" android:text="@string/route"/>
-    </LinearLayout>
-    <LinearLayout
+                android:layout_height="match_parent"
+                android:id="@+id/tvRouteInfo"
+                android:textAllCaps="false"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:text="@string/route"
+                android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
+    <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
+            android:layout_height="100dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
         <LinearLayout
+                android:id="@+id/llFromTo"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp">
             <TextView
                     android:text="@string/From"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView" android:textSize="18sp"
-                    android:gravity="center_vertical" android:layout_weight="0.97"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView"
+                    android:textSize="18sp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"/>
             <TextView
                     android:text="@string/To"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_weight="1"
-                    android:textSize="18sp" android:gravity="center_vertical"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:gravity="center_vertical"/>
         </LinearLayout>
+        <ImageView
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imageView3"
+                android:src="@mipmap/ic_switch_arrow"/>
         <LinearLayout
+                android:id="@+id/llGpsFromTo"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/imageView3"
+                android:layout_toStartOf="@id/imageView3"
+                android:layout_width="35dp"
                 android:layout_height="match_parent">
-            <EditText
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="10"
-                    android:id="@+id/editText" android:layout_width="260dp"/>
-            <EditText
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="10"
-                    android:id="@+id/editText2" android:layout_weight="1"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:weightSum="1">
             <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/imageView"
-                    android:scaleX="0.7" android:scaleY="0.7" android:background="@drawable/gps"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView"
+                    android:src="@mipmap/ic_gps_aim"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"/>
+            <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView2"
+                    android:layout_weight="1"
+                    android:src="@mipmap/ic_point_target"
             />
-            <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/imageView2"
-                    android:scaleX="0.6" android:scaleY="0.6" android:background="@drawable/point"
-                    android:elevation="1dp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <ImageView
-                    android:layout_height="match_parent" android:id="@+id/imageView3"
-                    android:scaleY="0.4" android:scaleX="0.7" android:background="@drawable/switch_arrow"
-                    android:layout_width="30dp"/>
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/llFromTo"
+                android:layout_toEndOf="@id/llFromTo"
+                android:layout_toLeftOf="@+id/llGpsFromTo"
+                android:layout_toStartOf="@+id/llGpsFromTo">
+            <EditText
+                    android:minHeight="18dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:id="@+id/editText"
+                    android:layout_weight="1"/>
+            <EditText
+                    android:minHeight="18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:id="@+id/editText2"
+                    android:layout_weight="1"/>
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
     <TextView
             android:text="@string/route_objects_caption"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView3" android:textSize="18sp"
-            android:textAlignment="center" android:textStyle="normal|bold"/>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/llMatchedObjects">
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:textStyle="normal|bold"
+            android:layout_weight="1"/>
+    <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="25">
         <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/llGas">
-            <ImageView
-                    android:id="@+id/imageView4"
-                    android:background="@drawable/gas" android:scaleX="0.8"
-                    android:scaleY="0.8" android:layout_weight="0.28"
-                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
-            <TextView
-                    android:text="Автозаправочные станции"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_weight="2"
-                    android:layout_gravity="center_vertical" tools:ignore="HardcodedText"/>
-            <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/checkBoxGas"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_vertical"/>
+                android:layout_height="wrap_content"
+                android:id="@+id/llMatchedObjects"
+                android:paddingEnd="5dp"
+                android:paddingRight="5dp"
+                android:paddingStart="5dp"
+                android:paddingLeft="5dp">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/llGas">
+                <ImageView
+                        android:id="@+id/imageView4"
+                        android:src="@mipmap/ic_gas"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="60dp"
+                        android:layout_width="0dp"
+
+                        android:layout_weight="2"/>
+                <TextView
+                        android:text="Автозаправочные станции"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textView4"
+                        android:textSize="16sp"
+                        android:layout_weight="9"
+                        android:gravity="center_vertical"
+                        tools:ignore="HardcodedText"
+                        android:layout_marginLeft="10dp"/>
+                <CheckBox
+                        android:id="@+id/checkBoxGas"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="end|center"
+                        android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/imageView5"
+                        android:src="@mipmap/ic_camp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="2"/>
+                <TextView
+                        android:text="@string/camps"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView5"
+                        android:textSize="16sp"
+                        android:layout_weight="9"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"/>
+                <CheckBox
+                        android:id="@+id/checkBoxCamp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="end|center"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/imageView6"
+                        android:src="@mipmap/ic_tech_service"
+                        android:layout_weight="2"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"/>
+                <TextView
+                        android:text="@string/tech_service"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="0dp"
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView6"
+                        android:layout_weight="9"
+                        android:layout_gravity="center_vertical" android:layout_marginLeft="10dp"/>
+                <CheckBox
+                        android:id="@+id/checkBoxTech"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="end|center" android:checked="true"
+                />
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/imageView7"
+                        android:src="@mipmap/ic_weight_station"
+                        android:layout_weight="2"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"/>
+                <TextView
+                        android:text="@string/weight_station"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="0dp"
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView7"
+                        android:layout_weight="9"
+                        android:layout_gravity="center_vertical"/>
+                <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/checkBoxWeight"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/imageView8"
+                        android:src="@mipmap/ic_auto_parts"
+                        android:layout_weight="2"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"/>
+                <TextView
+                        android:text="@string/auto_parts"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:textSize="16sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:id="@+id/textView8"
+                        android:layout_gravity="center_vertical"/>
+                <CheckBox
+                        android:id="@+id/checkBoxParts"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="end|center"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/imageView9"
+                        android:src="@mipmap/ic_atm"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="60dp"/>
+                <TextView
+                        android:id="@+id/textView9"
+                        android:text="@string/ATM"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:textSize="16sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:layout_gravity="center_vertical"/>
+                <CheckBox
+                        android:id="@+id/checkBoxAtm"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="end|center"/>
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <ImageView
-                    android:id="@+id/imageView5"
-                    android:background="@drawable/camp" android:scaleX="0.8"
-                    android:scaleY="0.8" android:layout_weight="0.16"
-                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
-            <TextView
-                    android:text="@string/camps"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView5" android:layout_weight="2"
-                    android:layout_gravity="center_vertical"/>
-            <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/checkBoxCamp"
-                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <ImageView
-                    android:id="@+id/imageView6"
-                    android:background="@drawable/tech_service" android:scaleX="0.8"
-                    android:scaleY="0.8" android:layout_weight="0.14"
-                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
-            <TextView
-                    android:text="СТО и шиномонтаж"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView6" android:layout_weight="2"
-                    android:layout_gravity="center_vertical"/>
-            <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/checkBoxTech"
-                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <ImageView
-                    android:id="@+id/imageView7"
-                    android:background="@drawable/weight_station" android:scaleX="0.8"
-                    android:scaleY="0.8" android:layout_weight="0.20"
-                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
-            <TextView
-                    android:text="@string/weight_station"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView7" android:layout_weight="2"
-                    android:layout_gravity="center_vertical"/>
-            <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/checkBoxWeight"
-                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <ImageView
-                    android:id="@+id/imageView8"
-                    android:background="@drawable/auto_parts" android:scaleX="0.8"
-                    android:scaleY="0.8" android:layout_weight="0.17"
-                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
-            <TextView
-                    android:text="@string/auto_parts"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView8" android:layout_weight="2"
-                    android:layout_gravity="center_vertical"/>
-            <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/checkBoxParts"
-                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <ImageView
-                    android:id="@+id/imageView9"
-                    android:background="@drawable/atm" android:scaleX="0.8"
-                    android:scaleY="0.8" android:layout_weight="0.13"
-                    android:layout_gravity="center_vertical" android:layout_width="50dp" android:layout_height="50dp"/>
-            <TextView
-                    android:text="@string/ATM"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView9" android:layout_weight="1.94"
-                    android:layout_gravity="center_vertical"/>
-            <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/checkBoxAtm"
-                    android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical"/>
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

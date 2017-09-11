@@ -13,4 +13,5 @@
     <string name="From">От</string>
     <string name="weight_station">Пункты весого контроля</string>
     <string name="camps">Стоянки и кемпинги</string>
+    <string name="tech_service">СТО и шиномонтаж</string>
 </resources>
